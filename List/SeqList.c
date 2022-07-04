@@ -1,3 +1,6 @@
+/*
+线性表顺序存储
+*/
 #define OK 1;
 #define ERROR 0;
 
