@@ -22,7 +22,7 @@ typedef struct _node   // 采用typedef的方式使得 struct _node 和 Node等�
 }Node;
 typedef Node *LinkList; // LinkList等价于struct Node *
 
-
+/**--------链表初始化-------------**/
 Status InitList(LinkList *head)
 {
     *head = (LinkList)malloc(sizeof(Node));  // head指针指向malloc分配的地址
@@ -71,7 +71,61 @@ void CreateListTail(LinkList *head, int n)
     t->next = NULL;
 }
 
-//删除单链表
+/**---------单链表插入&删除元素-----------**/
+// 第i个位置后插入元素e
+Status ListInsert(LinkList *L, int i, ElemType e)  
+{
+    LinkList p,q;
+    p = *L;
+
+    int j = 1;
+    p = p->next;  //指向第一个节点
+    while(p && j<i)
+    {
+        p = p->next;
+        ++j;
+    }
+
+    if(!p || j>i)
+    {
+        return ERROR; //第i个元素不存在
+    }
+
+    q = (LinkList)malloc(sizeof(Node));
+    q->data = e;
+    q->next = p->next;
+    p->next = q;
+    return OK
+}
+
+//删除第i个位置的元素
+Status ListDelete(LinkList *L, int i, ElemType *e)
+{
+    LinkList p,q;
+    p = *L;
+
+    // p = p->next;
+    int j = 1;  //从第一个位置开始找
+    while(p->next && j<i)
+    {
+        p = p->next;
+        ++j;
+    }
+
+    if(!(p->next) || j>i)
+    {
+        return ERROR;
+    }
+
+    q = p->next;
+    p->next = q->next;
+    *e = q->data;
+    free(q);
+
+    return OK;
+}
+
+//删除整个链表
 Status ClearList(LinkList L)
 {
     LinkList p,q;
@@ -104,19 +158,38 @@ int main(){
 
     //初始化链表
     Status flag;
+
+    printf("\n初始化链表");
     flag = InitList(&L);
-    printf("Init Status=%d,head address=%p\n",flag,L);
+    printf(",初始化状态=%d,head address=%p",flag,L);
     PrintList(L);
     
-    //创建链表(头插法)
+    printf("\n[创建链表] 头插法创建链表 ");
     CreateListHead(&L,5);
     PrintList(L);
 
-     //创建链表(尾部插法)
+    printf("\n[创建链表] 尾插法创建链表 ");
     CreateListTail(&L,6);
     PrintList(L);
 
+    //插入元素
+    int i = 6;
+    ElemType e = 99;
+    flag = ListInsert(&L,i,e);
+    printf("\n[插入元素] 在第%i个元素后插入元素%d,Status=%d,",i,e,flag);
+    PrintList(L);
+
+    //删除元素
+    i = 8;
+    e = 0;
+    flag = ListDelete(&L,i,&e);
+    printf("\n[删除元素] 删除第%d个元素,被删除元素=%d,Status=%d,",i,e,flag);
+    PrintList(L);
+
+
+    
     ClearList(L);
+    printf("\n[销毁链表]");
     PrintList(L);
 
 }
