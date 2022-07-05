@@ -73,5 +73,7 @@ int main()
     ElemType e=0;
     flag = GetElem(L,i,&e);
     printf("\n获取第%d个元素,Status=%d,元素值=%d",i,flag,e);
+
+    return 0;
 }
 
