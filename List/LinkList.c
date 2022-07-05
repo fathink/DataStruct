@@ -8,8 +8,8 @@
 #include <time.h>
 
 
-#define OK 1;
-#define ERROR 0;
+#define OK 1
+#define ERROR 0
 
 typedef int Status;
 
@@ -73,10 +73,10 @@ void CreateListTail(LinkList *head, int n)
 
 /**---------单链表插入&删除元素-----------**/
 // 第i个位置后插入元素e
-Status ListInsert(LinkList *L, int i, ElemType e)  
+Status ListInsert(LinkList L, int i, ElemType e)  
 {
     LinkList p,q;
-    p = *L;
+    p = L;
 
     int j = 1;
     p = p->next;  //指向第一个节点
@@ -95,14 +95,14 @@ Status ListInsert(LinkList *L, int i, ElemType e)
     q->data = e;
     q->next = p->next;
     p->next = q;
-    return OK
+    return OK;
 }
 
 //删除第i个位置的元素
-Status ListDelete(LinkList *L, int i, ElemType *e)
+Status ListDelete(LinkList L, int i, ElemType *e)
 {
     LinkList p,q;
-    p = *L;
+    p = L;
 
     // p = p->next;
     int j = 1;  //从第一个位置开始找
@@ -175,21 +175,21 @@ int main(){
     //插入元素
     int i = 6;
     ElemType e = 99;
-    flag = ListInsert(&L,i,e);
+    flag = ListInsert(L,i,e);
     printf("\n[插入元素] 在第%i个元素后插入元素%d,Status=%d,",i,e,flag);
     PrintList(L);
 
     //删除元素
-    i = 8;
+    i = 5;
     e = 0;
-    flag = ListDelete(&L,i,&e);
+    flag = ListDelete(L,i,&e);
     printf("\n[删除元素] 删除第%d个元素,被删除元素=%d,Status=%d,",i,e,flag);
     PrintList(L);
 
 
     
     ClearList(L);
-    printf("\n[销毁链表]");
+    printf("\n[销毁链表] ");
     PrintList(L);
 
 }

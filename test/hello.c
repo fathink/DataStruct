@@ -30,6 +30,8 @@ int main(){
     printf("a=%d(%p),b=%d(%p),c=%d\n",*a,a,b,&b,c);
     
 
+    int arr[10] = {1,2,3,4};
+    printf("%d",arr[2]);
 
     return 0;
 }
