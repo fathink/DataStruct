@@ -1,16 +1,16 @@
 #include <iostream>
 using namespace std;
 
-//将n盘子从x上借助y移动到z上
+//锟斤拷n锟斤拷锟接达拷x锟较斤拷锟斤拷y锟狡讹拷锟斤拷z锟斤拷
 void hanoi(int n, char a, char b, char c){
 	if (n == 1){
 		cout << a << "->" << c <<endl;
 	 }
 	else
 	{
-		hanoi(n - 1, a, c, b);//将n-1个盘子从x借助z移动到y上
-		cout << a << "->" << c << endl;//将第n个盘子从x移动到z上
-		hanoi(n - 1, b, a, c);//将n-1个盘子从y借助x移动到z
+		hanoi(n - 1, a, c, b);//锟斤拷n-1锟斤拷锟斤拷锟接达拷x锟斤拷锟斤拷z锟狡讹拷锟斤拷y锟斤拷
+		cout << a << "->" << c << endl;//锟斤拷锟斤拷n锟斤拷锟斤拷锟接达拷x锟狡讹拷锟斤拷z锟斤拷
+		hanoi(n - 1, b, a, c);//锟斤拷n-1锟斤拷锟斤拷锟接达拷y锟斤拷锟斤拷x锟狡讹拷锟斤拷z
 	}
 }
 int main(){

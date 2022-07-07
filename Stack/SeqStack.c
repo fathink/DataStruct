@@ -112,4 +112,6 @@ int main()
     flag = pop(&s,&e);
     printf("Stack(%p) pop=%d, current: ",&s,e);
     PrintStack(&s);
+
+    return 0;
 }
