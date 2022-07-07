@@ -15,6 +15,7 @@
 typedef int Status;
 typedef int ElemType;
 
+// 定义栈的结构
 typedef struct
 {
     ElemType data[MAXSIZE];
