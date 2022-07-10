@@ -33,7 +33,7 @@ Status StrAssign(String T, char *chars)
         T[0] = strlen(chars);
         for(int i=1;i<=T[0];i++)
         {
-            T[i] = *(chars+i-1);
+            T[i] = *(chars+i-1); //等价写法为chars[i-1]
         }
         return OK;
     }
@@ -51,7 +51,7 @@ int main()
 {
     String s;
     Status flag;
-    flag = StrAssign(s,"中文");
+    flag = StrAssign(s,"abcdefg");
 
     PrintString(s);
 
