@@ -19,10 +19,6 @@ int main()
     pa1 = &a[0];
     pa2 = a;  // pa2和pa1等价
 
-
-
-
-
     printf("Arrays=");
     for(i=0;i<MAXSIZE;i++)
     {
