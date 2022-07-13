@@ -47,6 +47,8 @@ Status PrintString(String T)
     return OK;
 }
 
+/*返回子串T在主串S中第pos个字符之后的位置，如果不存在则返回零*/
+int Index(String S, String T)
 int main()
 {
     String s;
