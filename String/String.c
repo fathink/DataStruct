@@ -86,7 +86,7 @@ int main()
     String s,t;
     Status flag;
     flag = StrAssign(s,"goodgoogle");
-    flag = StrAssign(t,"google");
+    flag = StrAssign(t,"googled");
 
     PrintString(s);
     PrintString(t);
