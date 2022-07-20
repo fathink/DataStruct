@@ -48,6 +48,7 @@ Status PrintString(String T)
     return OK;
 }
 
+//构造KMP算法next数组
 void get_next(String T, int *next)
 {
     int i,k;
@@ -55,16 +56,57 @@ void get_next(String T, int *next)
     k = 0;
     next[1]  = 0;
 
-    while (i < T[0])  // T[0]表示字符串长度
+    while (i<T[0]) // T[0]表示字符串长度
     {
-        /* code */
-    }
-    
+        if( k == 0 || T[i] == T[k])
+        {
+            ++i;
+            ++k;
+            next[i] = k;
+        }
+        else
+        {
+            k = next[k]; //如果字符不相同，对k进行回溯
+        }
+
+    }    
 }
 
+/*
+ * KMP算法实现字符串匹配函数
+ * 返回子串T在主串S中第pos个字符之后的位置，如果不存在则返回零
+ */
 int Index_KMP(String S, String T, int pos)
 {
+
+    int i = pos;
+    int j = 1;
+    int next[T[0]+1];
+    get_next(T, next);
     
+    //主循环
+    while (i <= S[0] && j <= T[0])
+    {
+        if(j==0 || S[i] == T[j])
+        {
+            ++i;
+            ++j;
+        }
+        else
+        {
+            j = next[j];
+        }
+    }
+
+    if(j>T[0])
+    {
+        return i - T[0]; //匹配到字符串，返回对应的索引
+    }
+    else
+    {
+        return 0;
+    }
+
 }
 
 int main()
@@ -72,13 +114,16 @@ int main()
     String s,t;
     Status flag;
     flag = StrAssign(s,"goodgoogle");
-    flag = StrAssign(t,"googled");
+    flag = StrAssign(t,"good");
 
     PrintString(s);
     PrintString(t);
 
     int idx;
-    idx = Index(s,t,2);
+    // idx = Index(s,t,2);
+
+    // 测试KMP算法
+    idx = Index_KMP(s,t,1);
     printf("%d",idx);
 
     return 0;
