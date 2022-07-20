@@ -48,38 +48,6 @@ Status PrintString(String T)
     return OK;
 }
 
-/*返回子串T在主串S中第pos个字符之后的位置，如果不存在则返回零*/
-int Index(String S, String T, int pos)
-{
-    int i = pos;  //遍历主串的索引，从pos的位置遍历主串S
-    int j = 1; //遍历字串T的索引
-
-    int iter = 0;
-    while(i <= S[0] && j <= T[0])
-    {
-        printf("Iter=%d,S[%d]=%c,T[%d]=%c\n",++iter,i,S[i],j,T[j]);
-        if(S[i] == T[j])
-        {
-            ++i;
-            ++j;
-        }
-        else
-        {
-            i = i-j+2;  //i退回到上次首次匹配的下一个字符串
-            j = 1;    //j退回到子串T的首位
-        }
-    }
-    
-    if(j > T[0])
-    {
-        return i - T[0];  //匹配到字符串，返回对应的索引
-    }
-    else
-    {
-        return 0;
-    }
-}
-
 void get_next(String T, int *next)
 {
     int i,k;
@@ -91,6 +59,11 @@ void get_next(String T, int *next)
     {
         /* code */
     }
+    
+}
+
+int Index_KMP(String S, String T, int pos)
+{
     
 }
 
