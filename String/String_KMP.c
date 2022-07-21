@@ -94,7 +94,7 @@ int Index_KMP(String S, String T, int pos)
         }
         else
         {
-            j = next[j];
+            j = next[j];  //对j进行回溯
         }
     }
 
@@ -113,8 +113,8 @@ int main()
 {
     String s,t;
     Status flag;
-    flag = StrAssign(s,"goodgoogle");
-    flag = StrAssign(t,"good");
+    flag = StrAssign(s,"abaaacdef");
+    flag = StrAssign(t,"aaa");
 
     PrintString(s);
     PrintString(t);
