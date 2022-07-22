@@ -9,6 +9,16 @@
 #include <time.h>
 
 
+typedef int ElemType;
+
+//定义二叉树结构
+typedef struct _BiTNode
+{
+    ElemType data;
+    struct _BiTNode *lchild, *rchild;
+}BiTNode, *BiTree;
+
+
 int main()
 {
     printf("OK");
