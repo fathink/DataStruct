@@ -19,8 +19,21 @@ typedef struct _BiTNode
 }BiTNode, *BiTree;
 
 
+//创建树
+CreatBiTree(BiTree *T)
+{
+    if(*T==NULL)
+    {
+        return NULL;
+    }
+    
+    *T = (BiTree)malloc(sizeof(BiTNode));
+    CreatBiTree(*T);
+}
+
+
 int main()
 {
-    printf("OK");
+    printf("\nOK\n");
     return 0;
 }
