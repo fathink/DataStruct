@@ -8,16 +8,21 @@
 #include <math.h>
 #include <time.h>
 
-
-typedef int ElemType;
+typedef char ElemType;
 
 //定义二叉树结构
 typedef struct _BiTNode
 {
     ElemType data;
-    struct _BiTNode *lchild, *rchild;
-}BiTNode, *BiTree;
+    struct _BiTNode *lchild, *rchild; // 定义二叉树左右孩子
+} BiTNode, *BiTree;
 
+//创建二叉树
+void CreateBiTree(BiTree *T)
+{
+    ElemType ch;
+    scanf("%c", &ch);
+}
 
 //创建树
 CreatBiTree(BiTree *T)
@@ -34,6 +39,7 @@ CreatBiTree(BiTree *T)
 
 int main()
 {
-    printf("\nOK\n");
+    printf("OK\n");
+
     return 0;
 }
