@@ -2,11 +2,9 @@
     二叉树操作
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
-#include <time.h>
+
+#include "../include/general.h"
+
 
 typedef char ElemType;
 
@@ -24,22 +22,43 @@ void CreateBiTree(BiTree *T)
     scanf("%c", &ch);
 }
 
-//创建树
-CreatBiTree(BiTree *T)
-{
-    if(*T==NULL)
-    {
-        return NULL;
-    }
+/*** 创建树 ***/
+// CreatBiTree(BiTree *T)
+// {
+//     if(*T==NULL)
+//     {
+//         return NULL;
+//     }
     
-    *T = (BiTree)malloc(sizeof(BiTNode));
-    CreatBiTree(*T);
-}
+//     *T = (BiTree)malloc(sizeof(BiTNode));
+//     CreatBiTree(*T);
+// }
 
 
 int main()
 {
-    printf("OK\n");
+    int flag;
+    BiTree T;  // 初始化一棵树
+    char nodes[]="AB#C##DE###";
+
+    // String s;
+    // flag = StrAssign(s,"AB#C##DE###");
+    // printf("%d\n",s[0]);
+    // for(int i=0;i<s[0];i++){
+    //     printf("%c",s[i+1]);
+    // }
+
+    // char t=nodes[0];
+    int i=0;
+    while(nodes[i]!='\0')
+    {
+        printf("%c",nodes[i]);
+        i++;
+
+    }
+    
+    
+
 
     return 0;
 }
