@@ -14,24 +14,27 @@ int add_new(int *a,int *b)
 
 }
 
+void chang_c(char **p)
+{
+    char c='z';
+    printf("p=%p,*p=%p\n",p,*p);
+    *p=&c;
+    printf("p=%p,*p=%p,&c=%p\n",p,*p,&c);
+}
 
 int main(){
-    printf("Hello world\n");
-    int *a;
-    int b = 4;
-    
-    int t = 5;
-    a = &t;
-
-    int c = add(*a,b);
-    printf("a=%d(%p),b=%d(%p),c=%d\n",*a,a,b,&b,c);
-
-    c = add_new(a,&b);
-    printf("a=%d(%p),b=%d(%p),c=%d\n",*a,a,b,&b,c);
+    printf("\n");
     
 
-    int arr[10] = {1,2,3,4};
-    printf("%d",arr[2]);
+
+    char c='w';
+    char *p;
+    p = &c;  //p指向c
+
+
+    printf("*p=%c,p=%p,&p=%p\n",*p, p,&p);
+    chang_c(&p);
+    printf("*p=%c,p=%p,&p=%p\n",*p, p,&p);
 
     return 0;
 }
