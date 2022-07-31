@@ -92,7 +92,7 @@ void PreOrderTraverse(BiTree T) // 递归方式遍历树
 
 void PreOrderTraverseByStack(BiTree T) //非递归方式遍历树
 {
-    printf("\nPreOrderTraverseByStack T=%p,&T=%p\n",T,&T);
+    // printf("\nPreOrderTraverseByStack T=%p,&T=%p\n",T,&T);
     if(T==NULL)
     {
         return;
@@ -124,16 +124,63 @@ void PreOrderTraverseByStack(BiTree T) //非递归方式遍历树
 }
 
 /** -------- 中序遍历二叉树 -------- **/
-void MidOrderTraverse(BiTree T)
+void InOrderTraverse(BiTree T)
 {
     if(T==NULL)
     {
         return;
     }
-    MidOrderTraverse(T->lchild);
+    InOrderTraverse(T->lchild);
     printf("%c",T->data);
-    MidOrderTraverse(T->rchild);
+    InOrderTraverse(T->rchild);
 }
+
+void InOrderTraverseByStack(BiTree T) // 非递归方式中序遍历树
+{
+    // 1、如果栈顶元素非空且左节点存在，将其入栈，重复该过程。若不存在则进入第2步
+    // 2、若栈非空，输出栈顶元素并出栈。判断刚出栈的元素的右节点是否存在，不存在重复第2步，存在则将右节点入栈，跳至第1步
+    if(T==NULL)
+    {
+        return;
+    }
+
+    Bool flag;
+    Stack stack;
+    stack.top = -1;
+
+    flag = push(&stack, T);
+    BiTNode top;
+
+    while(stack.top != -1)
+    {
+        //step 1
+        while(stack.data[stack.top]->lchild != NULL)  // stack.data[stack.top]表示栈顶元素
+        {
+            flag = push(&stack, stack.data[stack.top]->lchild);
+        }
+
+        //step2
+        while(stack.top != -1)
+        {
+            flag = pop(&stack, &T);
+            printf("%c",T->data);
+            
+            if(T->rchild != NULL)
+            {
+                flag = push(&stack,T->rchild);
+                break;
+            }
+        }
+
+    }
+    printf("\n");
+
+    
+
+    
+}
+
+
 
 /** -------- 后续遍历二叉树 -------- **/
 void PostOrderTraverse(BiTree T)
@@ -165,8 +212,9 @@ int main()
     PreOrderTraverseByStack(T);
     
     printf("中序遍历结果: ");
-    MidOrderTraverse(T);
-    printf("\n");
+    InOrderTraverse(T);
+    printf("\t");
+    InOrderTraverseByStack(T);
 
     printf("后序遍历结果: ");
     PostOrderTraverse(T);

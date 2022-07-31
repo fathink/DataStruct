@@ -31,6 +31,9 @@ int main(){
     char *p;
     p = &c;  //p指向c
 
+    int z=square(3+1);
+    printf("d=%d\n",z);
+
 
     printf("*p=%c,p=%p,&p=%p\n",*p, p,&p);
     chang_c(&p);
