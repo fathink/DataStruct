@@ -160,6 +160,7 @@ void InOrderTraverseByStack(BiTree T) // 非递归方式中序遍历树
         }
 
         //step2
+        //while循环会一直将栈顶输出，直到遇到有右节点的节点，这样能保证栈中元素不会重复寻找左孩子
         while(stack.top != -1)
         {
             flag = pop(&stack, &T);
