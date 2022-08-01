@@ -175,15 +175,12 @@ void InOrderTraverseByStack(BiTree T) // 非递归方式中序遍历树
 
     }
     printf("\n");
-
-    
-
     
 }
 
 
 
-/** -------- 后续遍历二叉树 -------- **/
+/** -------- 后序遍历二叉树 -------- **/
 void PostOrderTraverse(BiTree T)
 {
     if(T==NULL)
@@ -193,6 +190,49 @@ void PostOrderTraverse(BiTree T)
     PostOrderTraverse(T->lchild);
     PostOrderTraverse(T->rchild);
     printf("%c",T->data);
+}
+
+void PostOrderTraverseByStack(BiTree T) //非递归方式后序遍历二叉树
+{
+    if(T==NULL)
+    {
+        return;
+    }
+
+    Bool flag;
+    BiTree last_node=NULL;
+    Stack stack;
+    stack.top = -1; //栈的初始化
+
+    flag = push(&stack, T);  //根节点入栈
+    while (stack.top != -1)
+    {
+        //左子树非空一直push
+        while(stack.data[stack.top]->lchild != NULL)
+        {
+            flag = push(&stack, stack.data[stack.top]->lchild);
+        }
+        
+        //相比中序遍历，后序遍历需要判断上次出栈的元素是否是右节点
+        while(stack.top != -1){
+            BiTree top = stack.data[stack.top]; //栈顶元素
+            if(top->rchild == last_node || top->rchild == NULL)  //上次输出的元素是右节点或者右节点为空，出栈
+            {
+                flag = pop(&stack, &T);
+                printf("%c",T->data);
+
+                last_node = T; // 记录本次出栈元素
+            }
+            else if (top->rchild != NULL)
+            {
+                flag = push(&stack, top->rchild);
+                break;
+            }
+            
+        }
+    }
+    printf("\n");
+
 }
 
 
@@ -219,6 +259,7 @@ int main()
 
     printf("后序遍历结果: ");
     PostOrderTraverse(T);
-    printf("\n");
+    printf("\t");
+    PostOrderTraverseByStack(T);
     return 0;
 }
