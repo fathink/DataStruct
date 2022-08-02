@@ -261,5 +261,6 @@ int main()
     PostOrderTraverse(T);
     printf("\t");
     PostOrderTraverseByStack(T);
+    
     return 0;
 }
