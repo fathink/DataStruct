@@ -16,3 +16,10 @@ typedef struct _Graph
     int numNodes,numEdges; //当前顶点数和边数
     
 }MGraph;
+
+
+int main()
+{
+    
+    return 0;
+}
