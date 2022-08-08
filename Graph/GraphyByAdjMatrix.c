@@ -26,6 +26,14 @@ typedef struct  _Queue
     int rear;
 }Queue;
 
+//队列初始化
+Status InitQueue(Queue *Q)
+{
+    Q->front = 0;
+    Q->rear = 0;
+    return OK;
+}
+
 //入队
 Status EnQueue(Queue *Q, int e)
 {
@@ -44,15 +52,15 @@ Status DeQueue(Queue *Q, int *e)
         return ERROR; //队列空
     
     *e = Q->data[Q->front];
-    Q->front = (Q->front)
-    
+    Q->front = (Q->front+1) % MAXSIZE;
+    return OK;
 }
 
 
 
 
 /*
-创建图，图的拓扑结构如下所示
+    创建图，图的拓扑结构如下所示
           A
        /  |   \
      B    E    D
@@ -96,10 +104,10 @@ void CreateGraph(MGraph *G)
     }
 }
 
-/*
- 深度优先遍历（DFS,Depth First Search） 
- */
 Bool visited[MAXVEX]={FALSE}; // 记录访问过的节点
+/*
+    深度优先遍历（DFS,Depth First Search） 
+ */
 void DFS(MGraph G, int i)
 {
     int j;
@@ -116,23 +124,34 @@ void DFS(MGraph G, int i)
 }
 
 /*
- 广度优先遍历（BFS,Breadth First Search） 
+    广度优先遍历（BFS,Breadth First Search）
+    层次遍历，用队列进行实现
  */
-
-void BFS()
+void BFS(MGraph G)
 {
+    
 
 }
 
 
 int main()
 {
+    Status flag;
     MGraph graph;
     CreateGraph(&graph);
 
     printf("\n深度优先遍历图:\n");
     DFS(graph,0);
     printf("\n");
+
+    //定义队列
+    int e;
+    Queue queue;
+    flag = InitQueue(&queue);
+
+
+
+    
     
     return 0;
 }
