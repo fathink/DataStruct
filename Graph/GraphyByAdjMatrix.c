@@ -56,7 +56,13 @@ Status DeQueue(Queue *Q, int *e)
     return OK;
 }
 
-
+//判断栈是否空，空返回OK，非空返回ERROR
+Status QueueEmpty(Queue Q)
+{
+    if(Q.front == Q.rear)
+        return OK;
+    return ERROR;
+}
 
 
 /*
@@ -138,9 +144,34 @@ void BFS(MGraph G)
     flag = InitQueue(&queue); // 初始化队列
     for(i=0;i<G.numNodes;i++) //遍历顶点数
     {
+        printf("%d",i);
         if(!visited[i])
-        {
-            
+        {  
+            // 入队并标记
+            visited[i] = TRUE;
+            flag = EnQueue(&queue, i); 
+
+            while(!QueueEmpty(queue))
+            {
+                // 出队并打印
+                flag = DeQueue(&queue, &i);
+                printf("%c",G.vertexs[i]);   // 打印遍历节点,也可以做其他操作
+
+                for(j=0;j<G.numNodes;j++){
+                    if(G.arc[i][j] != INF && visited[j] != TRUE)
+                    {
+                        //入队并标记
+                        visited[j] = TRUE;
+                        flag = EnQueue(&queue, j);
+
+                    }
+
+                        
+                }
+
+            }
+
+
 
         }
 
@@ -161,7 +192,7 @@ int main()
     printf("\n");
 
     printf("\n广度优先遍历图:\n");
-
+    BFS(graph);
     printf("\n");
     
     return 0;
