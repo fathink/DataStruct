@@ -1,9 +1,10 @@
 /*
-    创建图
+    利用邻接矩阵存储实现图相关的操作
 */
 
 #include "../include/general.h"
 
+/* --------图相关的定义-------- */
 typedef char VertexType;  //顶点类型
 typedef int EdgeType; //边类型
 #define MAXVEX 100
@@ -17,10 +18,41 @@ typedef struct _Graph
     
 }MGraph;
 
+/*-------- 定义循环队列 ------ */
+typedef struct  _Queue
+{
+    int data[MAXSIZE];
+    int front;
+    int rear;
+}Queue;
+
+//入队
+Status EnQueue(Queue *Q, int e)
+{
+    if( (Q->rear+1) % MAXSIZE == Q->front)
+        return ERROR;  //队列满
+    
+    Q->data[Q->rear] = e;
+    Q->rear = (Q->rear+1) % MAXSIZE;
+    return OK;
+}
+
+//出队
+Status DeQueue(Queue *Q, int *e)
+{
+    if(Q->front == Q->rear)
+        return ERROR; //队列空
+    
+    *e = Q->data[Q->front];
+    Q->front = (Q->front)
+    
+}
+
+
 
 
 /*
-创建图
+创建图，图的拓扑结构如下所示
           A
        /  |   \
      B    E    D
