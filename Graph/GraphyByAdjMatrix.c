@@ -129,7 +129,23 @@ void DFS(MGraph G, int i)
  */
 void BFS(MGraph G)
 {
+    Status flag;
+    int i,j;
+    for(i=0;i<MAXVEX;i++)
+        visited[i] = FALSE;
     
+    Queue queue;
+    flag = InitQueue(&queue); // 初始化队列
+    for(i=0;i<G.numNodes;i++) //遍历顶点数
+    {
+        if(!visited[i])
+        {
+            
+
+        }
+
+    }
+
 
 }
 
@@ -144,14 +160,9 @@ int main()
     DFS(graph,0);
     printf("\n");
 
-    //定义队列
-    int e;
-    Queue queue;
-    flag = InitQueue(&queue);
+    printf("\n广度优先遍历图:\n");
 
-
-
-    
+    printf("\n");
     
     return 0;
 }
