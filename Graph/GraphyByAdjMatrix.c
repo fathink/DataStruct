@@ -142,40 +142,63 @@ void BFS(MGraph G)
     
     Queue queue;
     flag = InitQueue(&queue); // 初始化队列
-    for(i=0;i<G.numNodes;i++) //遍历顶点数
+
+    //顶点入队
+    flag = EnQueue(&queue, 0);
+    visited[0] = TRUE;
+
+    while (!QueueEmpty(queue))
     {
-        printf("%d",i);
-        if(!visited[i])
-        {  
-            // 入队并标记
-            visited[i] = TRUE;
-            flag = EnQueue(&queue, i); 
+        // 出队并打印节点
+        flag = DeQueue(&queue,&i); 
+        printf("%c",G.vertexs[i]); 
 
-            while(!QueueEmpty(queue))
+        // 将出队节点所连接的节点入队（不包含已经遍历的节点）
+        for(j=0;j<G.numNodes;j++){
+            if(G.arc[i][j] != INF && visited[j] != TRUE)
             {
-                // 出队并打印
-                flag = DeQueue(&queue, &i);
-                printf("%c",G.vertexs[i]);   // 打印遍历节点,也可以做其他操作
-
-                for(j=0;j<G.numNodes;j++){
-                    if(G.arc[i][j] != INF && visited[j] != TRUE)
-                    {
-                        //入队并标记
-                        visited[j] = TRUE;
-                        flag = EnQueue(&queue, j);
-
-                    }
-
-                        
-                }
-
+                flag = EnQueue(&queue, j); //入队
+                visited[j] = TRUE;
             }
-
-
-
         }
 
     }
+    
+
+    // for(i=0;i<G.numNodes;i++) //遍历顶点数
+    // {
+    //     printf("%d",i);
+    //     if(!visited[i])
+    //     {  
+    //         // 入队并标记
+    //         visited[i] = TRUE;
+    //         flag = EnQueue(&queue, i); 
+
+    //         while(!QueueEmpty(queue))
+    //         {
+    //             // 出队并打印
+    //             flag = DeQueue(&queue, &i);
+    //             printf("%c",G.vertexs[i]);   // 打印遍历节点,也可以做其他操作
+
+    //             for(j=0;j<G.numNodes;j++){
+    //                 if(G.arc[i][j] != INF && visited[j] != TRUE)
+    //                 {
+    //                     //入队并标记
+    //                     visited[j] = TRUE;
+    //                     flag = EnQueue(&queue, j);
+
+    //                 }
+
+                        
+    //             }
+
+    //         }
+
+
+
+    //     }
+
+    // }
 
 
 }
