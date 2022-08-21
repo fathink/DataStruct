@@ -55,7 +55,7 @@ void CreateGraph(MGraph *G)
     G->arc[1][8] = 12; G->arc[8][1] = 12; 
     G->arc[1][6] = 16; G->arc[6][1] = 16;
     G->arc[3][2] = 22; G->arc[2][3] = 22;  
-    G->arc[2][8] = 8; G->arc[8][2] = 8;
+    G->arc[2][8] = 8;  G->arc[8][2] = 8;
     G->arc[3][8] = 21; G->arc[8][3] = 21; 
     G->arc[4][3] = 20; G->arc[3][4] = 20; 
     G->arc[4][5] = 26; G->arc[5][4] = 26; 
@@ -63,7 +63,7 @@ void CreateGraph(MGraph *G)
     G->arc[6][3] = 24; G->arc[3][6] = 24; 
     G->arc[6][7] = 19; G->arc[7][6] = 19; 
     G->arc[7][3] = 16; G->arc[3][7] = 16; 
-    G->arc[7][4] = 7; G->arc[4][7] = 7; 
+    G->arc[7][4] = 7;  G->arc[4][7] = 7; 
     
      //打印邻接矩阵
     printf("Adjacency Matrix:\n");
@@ -87,7 +87,10 @@ void CreateGraph(MGraph *G)
 
 void MinSpanTree_Prime(MGraph G)
 {
-    
+    int min,i,j,k;
+    int adjvex[MAXVEX]; //索引是顶点，值是该顶点最小权重边所连接的顶点索引
+    int lowcost[MAXVEX]; // 索引是顶点，值是该顶点最小的边权值
+
 
 }
 
