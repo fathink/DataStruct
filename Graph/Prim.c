@@ -26,7 +26,7 @@ void CreateGraph(MGraph *G)
 {
     int i,j;
     G->numNodes = 9; //顶点数
-    G->numEdges = 9; // 边数
+    G->numEdges = 15; // 边数
 
     //初始化邻接矩阵
     for(i=0;i<MAXVEX;i++)
@@ -64,10 +64,16 @@ void CreateGraph(MGraph *G)
     G->arc[6][7] = 19; G->arc[7][6] = 19; 
     G->arc[7][3] = 16; G->arc[3][7] = 16; 
     G->arc[7][4] = 7; G->arc[4][7] = 7; 
-  
-
-    //打印邻接矩阵
+    
+     //打印邻接矩阵
     printf("Adjacency Matrix:\n");
+    for(i=0;i<G->numNodes;i++)
+    {
+        printf("%s\t",G->vertexs[i]);
+    }
+    printf("\n");
+
+   
     for(i=0;i<G->numNodes;i++)
     {
         for(j=0;j<G->numNodes;j++)
@@ -76,10 +82,12 @@ void CreateGraph(MGraph *G)
         }
         printf("\n");
     }
+    
 }
 
 void MinSpanTree_Prime(MGraph G)
 {
+    
 
 }
 
