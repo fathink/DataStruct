@@ -88,7 +88,7 @@ void CreateGraph(MGraph *G)
 void MinSpanTree_Prime(MGraph G)
 {
     int min,i,j,k;
-    int adjvex[MAXVEX]; //索引是顶点，值是该顶点最小权重边所连接的顶点索引
+    int adjvex[MAXVEX]; // 索引是顶点，值是该顶点当前最小权重边所连接的顶点
     int lowcost[MAXVEX]; // 索引是顶点，值是该顶点最小的边权值
 
 
