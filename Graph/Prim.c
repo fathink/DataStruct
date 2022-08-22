@@ -82,6 +82,7 @@ void CreateGraph(MGraph *G)
         }
         printf("\n");
     }
+    printf("\n");
     
 }
 
@@ -91,6 +92,44 @@ void MinSpanTree_Prime(MGraph G)
     int adjvex[MAXVEX]; // 索引是顶点，值是该顶点当前最小权重边所连接的顶点
     int lowcost[MAXVEX]; // 索引是顶点，值是该顶点最小的边权值
 
+    lowcost[0] = 0; // 初始化第一个权值为0，即将V0加入最小生成树，值为0表示加入最小生成树
+    adjvex[0] = 0; // 第一个顶点下标为0
+    for(j=1;j<G.numNodes;j++){
+        lowcost[j]=G.arc[0][j];
+        adjvex[j] = 0;
+    }
+
+    for(i=1;i<G.numNodes;i++)
+    {
+        min = INF;
+
+        // 遍历所有节点
+        j = 1; k=0;
+        while (j<G.numNodes)
+        {
+            if(lowcost[j]!=0 && lowcost[j] < min){
+                min = lowcost[j];
+                k = j;
+            }
+            j++;
+        }
+        printf("(%d,%d)\n",adjvex[k],k); // 打印当前的最短路径
+        lowcost[k] = 0; //将k节点加入最小生成树
+
+        //更新lowcost数组
+        for(j=1;j<G.numNodes;j++)
+        {
+            //以k为节点，遍历k节点的所有边，如果有边所连接的节点权重小于之前的权重，则更新
+            if(lowcost[j] != 0 && G.arc[k][j] < lowcost[j])
+            {
+                lowcost[j] = G.arc[k][j];
+                adjvex[j] = k; //节点j与节点k连接
+            }
+        }
+        
+    }
+    
+
 
 }
 
@@ -99,6 +138,8 @@ int main()
     Status flag;
     MGraph graph;
     CreateGraph(&graph);
+
+    MinSpanTree_Prime(graph);
 
     
     return 0;
