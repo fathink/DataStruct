@@ -22,8 +22,48 @@ void chang_c(char **p)
     printf("p=%p,*p=%p,&c=%p\n",p,*p,&c);
 }
 
+
+typedef struct _Edge
+{
+    int begin;
+    int end;
+    int weight;
+} Edge;
+
+void sort(Edge *edge){
+    int i,j;
+    Edge e;
+    
+    for(i=0;i<10;i++)
+        for(j=0;j<10-1;j++){
+            if(edge[j].weight<edge[j+1].weight){
+                e = edge[j];
+                edge[j] = edge[j+1];
+                edge[j+1] = e;       
+            }
+        }
+}
+
 int main(){
     printf("\n");
+    int i,j;
+
+    Edge edge[10];
+    for(i=0;i<10;i++){
+        edge[i].begin=i;
+        edge[i].end=i+1;
+        edge[i].weight=i*i;
+    }
+    for(i=0;i<10;i++){
+        printf("(%d,%d) %d\n",edge[i].begin,edge[i].end,edge[i].weight);
+    }
+
+    sort(edge);
+
+    printf("\nsorted:\n");
+    for(i=0;i<10;i++){
+        printf("(%d,%d) %d\n",edge[i].begin,edge[i].end,edge[i].weight);
+    }
     
 
 
@@ -37,3 +77,4 @@ int main(){
 
     return 0;
 }
+
