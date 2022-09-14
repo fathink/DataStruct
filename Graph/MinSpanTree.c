@@ -1,6 +1,7 @@
 /*
-    最小生成树
-    Prim算法实现最小生成树
+    最小生成树,边权重和最小的树，核心有两种算法实现最小生成树，Prim&Kruskal
+    ·Prim算法：基于顶点出发，时间复杂度为O(N^2),针对稠密图更有优势；
+    ·Kruskal算法：基于边出发，时间复杂度为O(NLogN),针对稀疏图有很大的优势；    
 */
 
 #include "../include/general.h"
@@ -18,6 +19,14 @@ typedef struct _Graph
     int numNodes,numEdges; //当前顶点数和边数
     
 }MGraph;
+
+typedef struct _Edge
+{
+    int begin;
+    int end;
+    int weight;
+}Edge;
+
 
 /*
     创建图，图结构见《大话数据结构》P209
@@ -88,6 +97,7 @@ void CreateGraph(MGraph *G)
 
 void MinSpanTree_Prime(MGraph G)
 {
+    printf("Prime:\n");
     int min,i,j,k;
     int adjvex[MAXVEX]; // 索引是顶点，值是该顶点当前最小权重边所连接的顶点
     int lowcost[MAXVEX]; // 索引是顶点，值是该顶点最小的边权值
@@ -128,8 +138,12 @@ void MinSpanTree_Prime(MGraph G)
         }
         
     }
-    
 
+}
+
+void MinSpanTree_Kruskal(MGraph G)
+{
+    printf("Kruskal:\n");
 
 }
 
@@ -138,9 +152,12 @@ int main()
     Status flag;
     MGraph graph;
     CreateGraph(&graph);
-
+    
+    //Prime算法实现最小生成树 
     MinSpanTree_Prime(graph);
 
+    //Kruskal算法生成最小生成树
+    MinSpanTree_Kruskal(graph);
     
     return 0;
 }
