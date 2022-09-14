@@ -20,12 +20,7 @@ typedef struct _Graph
     
 }MGraph;
 
-typedef struct _Edge
-{
-    int begin;
-    int end;
-    int weight;
-}Edge;
+
 
 
 /*
@@ -95,9 +90,12 @@ void CreateGraph(MGraph *G)
     
 }
 
+/*-------------- Prime --------------*/
+
 void MinSpanTree_Prime(MGraph G)
 {
     printf("Prime:\n");
+    int total = 0;
     int min,i,j,k;
     int adjvex[MAXVEX]; // 索引是顶点，值是该顶点当前最小权重边所连接的顶点
     int lowcost[MAXVEX]; // 索引是顶点，值是该顶点最小的边权值
@@ -123,7 +121,8 @@ void MinSpanTree_Prime(MGraph G)
             }
             j++;
         }
-        printf("(%d,%d)\n",adjvex[k],k); // 打印当前的最短路径
+        total+=G.arc[adjvex[k]][k];
+        printf("Edge=(%d,%d),Weight=%d,Total=%d\n",adjvex[k],k,G.arc[adjvex[k]][k],total); // 打印当前的最短路径
         lowcost[k] = 0; //将k节点加入最小生成树
 
         //更新lowcost数组
@@ -141,9 +140,99 @@ void MinSpanTree_Prime(MGraph G)
 
 }
 
+/*-------------- Kruskal-----------*/
+//定义边集数组
+typedef struct _Edge
+{
+    int begin;
+    int end;
+    int weight;
+}Edge;
+
+void sort(Edge edges[],int length)
+{
+    int i,j;
+    Edge e;
+
+    //简单冒泡排序
+    for(i=0;i<length-1;i++)
+    {
+        for(j=0;j<length-1;j++)
+        {
+            if(edges[j].weight > edges[j+1].weight)
+            {
+                e = edges[j];
+                edges[j] = edges[j+1];
+                edges[j+1] = e;
+            }
+        }
+    }
+}
+
+// 查找连接线的尾部下标
+int Find(int *parent, int f)
+{
+    while (parent[f]>0)
+    {
+        f = parent[f];
+    }
+
+    return f;
+    
+}
+
 void MinSpanTree_Kruskal(MGraph G)
 {
-    printf("Kruskal:\n");
+    printf("\nKruskal:\n");
+    
+    int i,j,n,m;
+    Edge edges[G.numEdges]; //定义边集数组
+    int parent[G.numEdges]; //定义一维数组用于判断呢是否形成回路
+  
+
+    //邻接矩阵转换成边集数组
+    int k=0;
+    for(i=0;i<G.numNodes;i++)
+    {
+        for(j=i+1;j<G.numNodes;j++)
+        {
+            if(G.arc[i][j]!=INF){
+                edges[k].begin = i;
+                edges[k].end = j;
+                edges[k].weight = G.arc[i][j];
+                k++;
+            }
+
+        }
+    }
+    for(i=0;i<G.numNodes;i++)
+    {
+        parent[i] = 0;
+    }
+    
+
+    //边集数组按照weight从小到大排序
+    sort(edges,G.numEdges);
+
+    //循环每一条边
+    int total = 0;
+    for(i=0;i<G.numEdges;i++)
+    {
+        n = Find(parent, edges[i].begin);
+        m = Find(parent, edges[i].end);
+
+        // m和n不相等，说明没有形成环路,加入最小生成树
+        if(n!=m)
+        {
+            parent[n] = m;
+
+            total += edges[i].weight;
+            printf("Edge=(%d,%d),Weight=%d,Total=%d\n",edges[i].begin,edges[i].end,edges[i].weight,total);
+            
+        }
+
+    }
+    printf("\n");
 
 }
 
