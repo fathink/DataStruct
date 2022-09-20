@@ -55,22 +55,23 @@ void CreateGraph(MGraph *G)
     G->vertexs[8] = "V8";
 
     //初始化边,无向图，对称矩阵
-    G->arc[0][1] = 10; G->arc[1][0] = 10; 
-    G->arc[0][5] = 11; G->arc[5][0] = 11; 
-    G->arc[1][2] = 18; G->arc[2][1] = 18; 
-    G->arc[1][8] = 12; G->arc[8][1] = 12; 
-    G->arc[1][6] = 16; G->arc[6][1] = 16;
-    G->arc[3][2] = 22; G->arc[2][3] = 22;  
-    G->arc[2][8] = 8;  G->arc[8][2] = 8;
-    G->arc[3][8] = 21; G->arc[8][3] = 21; 
-    G->arc[4][3] = 20; G->arc[3][4] = 20; 
-    G->arc[4][5] = 26; G->arc[5][4] = 26; 
-    G->arc[5][6] = 17; G->arc[6][5] = 17; 
-    G->arc[6][3] = 24; G->arc[3][6] = 24; 
-    G->arc[6][7] = 19; G->arc[7][6] = 19; 
-    G->arc[7][3] = 16; G->arc[3][7] = 16; 
-    G->arc[7][4] = 7;  G->arc[4][7] = 7; 
-    
+    G->arc[0][1] = 1; G->arc[1][0] = 1; 
+    G->arc[0][2] = 5; G->arc[2][0] = 5; 
+    G->arc[1][2] = 3; G->arc[2][1] = 3; 
+    G->arc[1][4] = 5; G->arc[4][1] = 5; 
+    G->arc[1][3] = 7; G->arc[3][1] = 7; 
+    G->arc[2][4] = 1; G->arc[4][2] = 1; 
+    G->arc[2][5] = 7; G->arc[5][2] = 7; 
+    G->arc[3][4] = 2; G->arc[4][3] = 2;
+    G->arc[3][6] = 3; G->arc[6][3] = 3; 
+    G->arc[4][5] = 3; G->arc[5][4] = 3; 
+    G->arc[4][6] = 6; G->arc[6][4] = 6; 
+    G->arc[4][7] = 9; G->arc[7][4] = 9; 
+    G->arc[5][7] = 5; G->arc[7][5] = 5; 
+    G->arc[6][7] = 2; G->arc[7][6] = 2;
+    G->arc[6][8] = 7; G->arc[8][6] = 7;
+    G->arc[7][8] = 4; G->arc[8][7] = 4;   
+
      //打印邻接矩阵
     printf("Adjacency Matrix:\n");
     for(i=0;i<G->numNodes;i++)
@@ -90,4 +91,20 @@ void CreateGraph(MGraph *G)
     }
     printf("\n");
     
+}
+
+
+int main()
+{
+    Status flag;
+    MGraph graph;
+    CreateGraph(&graph);
+    
+    // //Prime算法实现最小生成树 
+    // MinSpanTree_Prime(graph);
+
+    // //Kruskal算法生成最小生成树
+    // MinSpanTree_Kruskal(graph);
+    
+    return 0;
 }
