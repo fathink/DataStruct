@@ -169,12 +169,11 @@ void ShortestPathByDijkstra(MGraph G, int v0)
     v=8;
     while(1)
     {
-    
         if(Path[v]==-1){
-            printf("%d",v0);  // 前驱为-1，表示到达起始点
+            printf("%d<-%d",v,v0);  // 前驱为-1，表示到达起始点
             break;
         } 
-        printf("%d<=",v);
+        printf("%d<-",v);
         v=Path[v];
     }
     printf("\n");
