@@ -94,14 +94,106 @@ void CreateGraph(MGraph *G)
 }
 
 
+/*
+    Dijkstra算法求最短路径
+    Args: G,图结构， v0表示出发顶点的索引
+*/
+void ShortestPathByDijkstra(MGraph G, int v0)
+{
+    int Path[G.numNodes]; // Path[v]的值表示前驱顶点的下标
+    int Dis[G.numNodes]; // Dis[v]表示v0到v的最短路径
+    int final[G.numNodes]; // final[v]表示求得v0到v的最短路径
+
+    int v,min,w,k;
+    //初始化
+    for(v=0;v<G.numNodes;v++)
+    {
+        Path[v] = -1;
+        Dis[v] = G.arc[v0][v];
+        final[v] = 0;
+    }
+
+    Dis[v0] = 0; //v0到v0的路径为0
+    final[v0] = 1; //v0到v0不需要求最短路径
+
+    //主循环，每次求的v0到v的最短距离
+    for(v=1; v<G.numNodes; v++)
+    {
+        min = INF;
+        for(w=0;w<G.numNodes;w++)
+        {
+            if(final[w]!=1 && Dis[w] < min)
+            {
+                k = w;  
+                min = Dis[w]; 
+            }
+
+        }
+
+        final[k] = 1; //找到当前距离v0的最小距离的节点为k
+
+        //更新最短距离,关键逻辑
+        for(w=0;w<G.numNodes;w++)
+        {
+            if(final[w]!=1 && min+G.arc[k][w] < Dis[w])
+            {
+                Dis[w] = min+G.arc[k][w]; // 更新v0到w的最短路径
+                Path[w] = k; // w的前驱节点为k，站在k的基础上使得距离最短
+
+            }
+
+        }
+
+    }
+
+    //输出最短路径
+    printf("\n");
+    for(v=0; v<G.numNodes; v++)
+    {
+        printf("%s\t",G.vertexs[v]);
+    }
+    printf("\n");
+    for(v=0;v<G.numNodes;v++)
+    {
+        printf("%d\t",Dis[v]); // v0到各个节点的最短距离
+    }
+    printf("\n");
+
+    for(v=0;v<G.numNodes;v++)
+    {
+        printf("%d\t",Path[v]);
+    }
+
+    //v0到任意点的最短路径
+    printf("\nShort Path: ");
+    v=8;
+    while(1)
+    {
+    
+        if(Path[v]==-1){
+            printf("%d",v0);  // 前驱为-1，表示到达起始点
+            break;
+        } 
+        printf("%d<=",v);
+        v=Path[v];
+    }
+    printf("\n");
+    
+    
+    
+
+
+}
+
+
 int main()
 {
     Status flag;
     MGraph graph;
     CreateGraph(&graph);
     
-    // //Prime算法实现最小生成树 
-    // MinSpanTree_Prime(graph);
+    //Dijkstra算法求最短路径
+    ShortestPathByDijkstra(graph, 0);
 
     // //Kruskal算法生成最小生成树
     // MinSpanTree_Kruskal(graph);
