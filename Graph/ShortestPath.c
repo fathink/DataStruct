@@ -150,7 +150,7 @@ void ShortestPathByDijkstra(MGraph G, int v0)
     printf("\n");
     for(v=0; v<G.numNodes; v++)
     {
-        printf("%s\t",G.vertexs[v]);
+        printf("%s\t", G.vertexs[v]);
     }
     printf("\n");
     for(v=0;v<G.numNodes;v++)
@@ -177,13 +177,67 @@ void ShortestPathByDijkstra(MGraph G, int v0)
         v=Path[v];
     }
     printf("\n");
-    
-    
-    
-
-
 }
 
+/*
+    Prim算法求最短路径
+    Args: G,图结构
+*/
+void ShortestPathByPrim(MGraph G)
+{
+    int D[G.numNodes][G.numNodes];  // 记录最短路径的矩阵
+    int P[G.numNodes][G.numNodes];  // 记录最短路径的索引
+    int i,j;
+
+    // 初始化
+    for(i=0;i<G.numNodes;i++)
+    {
+        for(j=0;j<G.numNodes;j++)
+        {
+            D[i][j] = G.arc[i][j];
+            P[i][j] = j;
+        }
+    }
+
+
+    //Prim核心算法
+    int k,m,n;
+    for(k=0;k<G.numNodes;k++)
+    {
+        for(m=0;m<G.numNodes;m++)
+        {
+            for(n=0;n<G.numNodes;n++)
+            {
+                if(D[m][n] > D[m][k] + D[k][n])
+                {
+                    D[m][n] = D[m][k] + D[k][n];  // 说明m到n经过k点使得距离更小
+                    P[m][n] = P[m][k]; // 路径设置为经历下标为k的顶点
+                }
+            }
+        }
+    }
+
+
+    //输出任意两点的最短路径
+    printf("\nPrim Short Path: ");
+
+    int begin=0;
+    int end = 8;
+
+    k = P[begin][end];
+    printf("%d->",begin);
+    while(k!=end)
+    {
+        printf("%d->",k);
+        k = P[k][end];
+    }
+    printf("%d\n",end); // 打印终点
+    
+    
+
+    
+
+}
 
 int main()
 {
@@ -194,8 +248,8 @@ int main()
     //Dijkstra算法求最短路径
     ShortestPathByDijkstra(graph, 0);
 
-    // //Kruskal算法生成最小生成树
-    // MinSpanTree_Kruskal(graph);
+    //Prim算法生成最小生成树
+    ShortestPathByPrim(graph);
     
     return 0;
 }
