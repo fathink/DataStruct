@@ -23,8 +23,6 @@ typedef struct _Graph
 }MGraph;
 
 
-
-
 /*
     创建图，图结构见《大话数据结构》P220
 */
@@ -232,10 +230,6 @@ void ShortestPathByPrim(MGraph G)
         k = P[k][end];
     }
     printf("%d\n",end); // 打印终点
-    
-    
-
-    
 
 }
 
