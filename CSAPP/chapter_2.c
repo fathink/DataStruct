@@ -38,6 +38,8 @@ void int_demo()
     // 打印最小整数和最大整数十六进制输出
     show_bytes((byte_pointer)p1, sizeof(*p1)); 
     show_bytes((byte_pointer)p2, sizeof(*p2));
+
+    printf("%d",TMax+1);
     
 
 }
@@ -63,9 +65,9 @@ void float_demo()
 
 int main()
 {
-    // int_demo();
+    int_demo();
    
-    float_demo();
+    // float_demo();
 
     return 0;
 
