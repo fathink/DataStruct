@@ -244,8 +244,16 @@ int conditional(int x, int y, int z) {
  *   Rating: 3
  */
 int isLessOrEqual(int x, int y) {
+    int a=(x>>31)&0x1; //x符号位
+    int b=(y>>31)&0x1; //y符号位
+    int c1=(a&~b); //x正y负，返回0
+    int c2=(~a&b); //x负y正，返回1
 
-  return 2;
+    int e=y+(~x+1); // 计算y-x
+    int flag=e>>31; //如果falg和c2不同，说明溢出
+    
+
+  return c1 | (!c2&!flag);
 }
 //4
 /* 
@@ -257,7 +265,10 @@ int isLessOrEqual(int x, int y) {
  *   Rating: 4 
  */
 int logicalNeg(int x) {
-  return 2;
+    // if x!=0 return 0
+    //x为正，(~x+1)>>31为1
+    //x为负，(~x+1)>>31为0，将(~x+1)与x做与运算，然后使用算术右移，变成1111...，最后加1，返回0
+  return ((x|(~x+1))>>31)+1;
 }
 /* howManyBits - return the minimum number of bits required to represent x in
  *             two's complement
@@ -272,7 +283,31 @@ int logicalNeg(int x) {
  *  Rating: 4
  */
 int howManyBits(int x) {
-  return 0;
+    //找到正数最左边的1所在的位置，再加上1位符号位（负数的话先转为正数）
+    int b16,b8,b4,b2,b1,b0;
+    int flag=x>>31; //记录符号
+    x=(flag&~x)|(~flag&x); // x是负数，按位取反，x是正数，不做处理
+
+    b16=!!(x>>16)<<4; //如果x高16为不为零，则让b16=16，否则b16=0
+    x=x>>b16; //继续看高16位的情况
+
+    //进行拆分
+    b8=!!(x>>8)<<3; //处理高8位
+    x=x>>b8;
+
+    b4=!!(x>>4)<<2; //处理高4位
+    x=x>>b4;
+
+    b2=!!(x>>2)<<1; //处理高2位
+    x=x>>b2;
+
+    b1=!!(x>>1); //倒数第2位
+    x=x>>b1;
+
+    b0=x; //最后一位
+
+
+  return b16+b8+b4+b2+b1+b0+1;
 }
 //float
 /* 
@@ -287,7 +322,27 @@ int howManyBits(int x) {
  *   Rating: 4
  */
 unsigned floatScale2(unsigned uf) {
-  return 2;
+    //32位单精度浮点数，31位符号位，31-23位阶码,23-0尾数
+
+    unsigned exp=(uf&0x7f800000)>>23; //获取阶码
+    unsigned sign=uf>>31&0x1; //获取符号位
+    unsigned frac=uf&0x7fffff;
+
+    unsigned res;
+
+    if (exp==0xff) return uf; //如果是NaN，直接返回uf
+
+    //非规格化数
+    if (exp==0){
+        frac<<=1;
+        res=(sign<<31)|(exp<<23)|frac;
+    }
+    else{
+        exp++;
+        res=(sign<<31)|(exp<<23)|frac;
+    }
+
+  return res;
 }
 /* 
  * floatFloat2Int - Return bit-level equivalent of expression (int) f
@@ -302,7 +357,38 @@ unsigned floatScale2(unsigned uf) {
  *   Rating: 4
  */
 int floatFloat2Int(unsigned uf) {
-  return 2;
+    int exp=(uf&0x7f800000)>>23; //获取阶码
+    int sign=uf>>31&0x1; //获取符号位
+    int frac=uf&0x7fffff; //获取尾数
+
+    int E=exp-127;
+
+    // 小于0的小数，直接返回0
+    if (E<0) return 0;
+   
+    // NaN，直接返回0x80000000，超过整数范围同样返回0x8000...
+    if (E>=31) return 0x80000000;
+
+    //给尾数补充上省略的1
+    frac=frac|(1<<23);
+    
+    //判断E和23的大小，23是尾数长度
+    if(E<23){
+        frac=frac>>(23-E);
+    }
+    else{
+        frac=frac<<(E-23);
+    }
+    
+    int res;
+    if(sign){
+        res=-frac;
+    }
+    else{
+        res=frac;
+    }
+
+  return res;
 }
 /* 
  * floatPower2 - Return bit-level equivalent of the expression 2.0^x
@@ -318,5 +404,24 @@ int floatFloat2Int(unsigned uf) {
  *   Rating: 4
  */
 unsigned floatPower2(int x) {
-    return 2;
+    
+    //超过极大值，返回NaN
+    if (x>127) return 0xFF<<23;
+
+    //超过极小值，返回0
+    if (x<-148) return 0;
+
+    //规格化数
+    if (x>=-126)
+    {
+        int exp = x + 127; // 32位浮点数的偏置为127,所以这里要加上127
+        return exp << 23; 
+
+    }
+    else  //非规格化数
+    {
+        int t = 148 + x; // 22-(1-127-x)=148+x,非规格化数，考虑尾数实现幂函数
+        return 1 << t;
+    }
+    
 }

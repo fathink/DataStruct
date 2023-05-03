@@ -74,6 +74,11 @@ int main(){
     // POINT po=B;
     // printf("%d\n",po);
 
+    int aa=16;
+    int b=aa&0xF;
+    int *zz;
+    zz=&aa;
+
     return 0;
 }
 
