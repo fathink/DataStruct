@@ -1,3 +1,11 @@
+/*
+ * 第三章：程序的机器级表示
+ *
+ * 指针函数测试
+ * 
+ * 
+*/
+
 #include <stdio.h>
 
 #define N 10
@@ -32,8 +40,6 @@ int main()
 {
     
     int s = fun_point();
-    
-
     return 0;
     
 }
