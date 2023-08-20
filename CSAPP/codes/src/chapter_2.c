@@ -42,6 +42,10 @@ void int_demo()
 
     int *p1 = &TMin;
     int *p2 = &TMax;
+
+    // printf("%p\n",&p1);
+    //打印p1指针本身的地址的存储地址和值
+    show_bytes((byte_pointer)(&p1), sizeof(p1)); 
     
     // 打印最小整数和最大整数十六进制输出
     show_bytes((byte_pointer)p1, sizeof(*p1)); 
