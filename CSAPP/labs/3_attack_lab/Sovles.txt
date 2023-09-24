@@ -1,0 +1,22 @@
+解决方案
+
+Part1:
+Level1:
+ cat touch1.txt | ./hex2raw | ./ctarget -q
+
+Level1:
+ cat touch1.txt | ./hex2raw | ./ctarget -q
+
+Level2:
+ cat touch2.txt | ./hex2raw | ./ctarget -q
+
+Level3:
+ cat touch3.txt | ./hex2raw | ./ctarget -q
+
+
+Part2:
+Level2:
+cat v2_touch2.txt | ./hex2raw | ./rtarget -q
+
+
+Ref: https://zhuanlan.zhihu.com/p/339802171

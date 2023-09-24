@@ -3,7 +3,9 @@
 
 tmp/
 test/
+t
 
 # 忽略汇编文件
 *.s
+*.o
 *.out
