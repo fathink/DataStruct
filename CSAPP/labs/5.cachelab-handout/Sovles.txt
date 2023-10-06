@@ -1,0 +1,12 @@
+解决方案
+
+先执行make
+
+PartA:
+- 修改csim.c函数，然后执行： ./test-csim
+
+PartB:
+- 修改trans.c函数，然后执行: ./test-trans -M 32 -N 32
+
+
+Ref: https://zhuanlan.zhihu.com/p/342594115
