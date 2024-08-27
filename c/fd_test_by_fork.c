@@ -9,7 +9,7 @@ struct file
         dev_ t  f_rdev ;// 用于/dev/tty
         off_t  f_ops;//当前文件偏移量
         unsigned short f_flags;//文件标志，O_RDONLY,O_NONBLOCK和O_SYNC
-        unsigned short f_count;//打开的文件数目,文件的引用计数，关闭一个文件描述符就会减少一次引用计数，只有当引用计数为0时，文件才会关闭
+        unsigned short f_count;//打开的文件数目,文件的引用计数，假设有两个文件描述符指向文件表，那么该文件表的引用计数为2，关闭一个文件描述符就会减少一次引用计数，只有当引用计数为0时，文件表就会关闭
         unsigned short f_reada;
         struct inode *f_inode;//指向inode的结构指针，实际存储内容的地方
         struct file_operations *f_op;//文件索引指针
@@ -19,6 +19,7 @@ struct file
 Ref: 
 [1] 介绍Linux文件管理，含文件表数据结构等信息： https://blog.csdn.net/wwwlyj123321/article/details/100298377
 [2] 文件描述符（多进程对同一个文件操作）： https://blog.csdn.net/KingOfMyHeart/article/details/90272050
+[3] 打开文件表、文件描述符、打开的文件句柄以及i-node之间的关系: https://blog.csdn.net/ai2000ai/article/details/79738422
 
 
 */
