@@ -22,6 +22,7 @@ int main(int args, char * argv[])
     char *msgs[N] = {"hello from foo","hello from bar"};
     
     ptr = msgs;
+    printf("ok\n");
 
     return 0;
 }
