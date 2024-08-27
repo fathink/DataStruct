@@ -20,7 +20,7 @@ int main(int args, char * argv[])
     pthread_t tid;
 
     char *msgs[N] = {"hello from foo","hello from bar"};
-    
+
     ptr = msgs;
     printf("ok\n");
 
