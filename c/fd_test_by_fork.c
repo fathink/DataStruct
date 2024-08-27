@@ -9,7 +9,7 @@ struct file
         dev_ t  f_rdev ;// 用于/dev/tty
         off_t  f_ops;//当前文件偏移量
         unsigned short f_flags;//文件标志，O_RDONLY,O_NONBLOCK和O_SYNC
-        unsigned short f_count;//打开的文件数目
+        unsigned short f_count;//打开的文件数目,文件的引用计数，只有当引用计数为0时，文件才会关闭
         unsigned short f_reada;
         struct inode *f_inode;//指向inode的结构指针，实际存储内容的地方
         struct file_operations *f_op;//文件索引指针
