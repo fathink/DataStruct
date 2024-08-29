@@ -26,12 +26,14 @@ int main(int args, char * argv[])
     int (*p)(int, int) = NULL; //定义一个与maxValue兼容的指针
     p = max_value;
 
-    int res = (*p)(2,3);  // 通过指针调用函数
-    // int res = p(2,3);  // 两种调用方式均可以
+    int res = p(2,3);  // 两种调用方式均可以
+    // int res = (*p)(2,3);  // 通过指针调用函数
+    
     printf("res = %d\n", res);
 
-
-    printf("%p,%p",max_value, &max_value);
+    printf("%p-%p\n",p,*p);
+    printf("%p,%p\n",max_value, &max_value);
+    
 
     return 0;
 }
