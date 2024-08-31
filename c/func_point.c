@@ -31,7 +31,7 @@ int main(int args, char * argv[])
     
     printf("res = %d\n", res);
 
-    printf("%p-%p\n",p,*p);
+    printf("%p-%p\n",p,*p);  // p和*p等价
     printf("%p,%p\n",max_value, &max_value);
     
 
