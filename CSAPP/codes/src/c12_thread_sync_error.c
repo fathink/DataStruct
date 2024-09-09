@@ -40,7 +40,7 @@ void * thread_task(void * vargp)
     for(i=0; i<niters; i++)
         // 这里的自增操作实际分成三步，内存加载到寄存器，寄存器自增1，写回内存；
         // 无法预料cpu一定操作完整个流程
-        cnt++;   
+        cnt++;
 
     return NULL;
 }
