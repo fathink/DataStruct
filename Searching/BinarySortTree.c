@@ -1,5 +1,5 @@
 /*
-    二叉排序树
+    二叉排序树，（Binary Sort Tree），又称为二叉查找树，左子树的值均小于根节点，右子树的值均大于根节点；
 */
 
 
@@ -15,6 +15,8 @@ typedef struct BiTNode
     struct BiTNode *lchild, *rchild; //左右节点
 }BiTNode, *BiTree;
 
+
+// 
 int main()
 {
     printf("OK\n");
