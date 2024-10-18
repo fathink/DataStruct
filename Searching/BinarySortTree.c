@@ -87,4 +87,5 @@ int main()
         InsertBST(&T,a[i]);
     }
     printf("OK\t%p\t%p\n",&T,T);
+    
 }
